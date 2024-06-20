@@ -9,12 +9,12 @@ export const GlobalStyle = createGlobalStyle`
 
    :focus {
     outline: 0;
-    box-shadow: 0 0 0 2px ${({ theme }) => theme.yellowDark};
+    box-shadow: 0 0 0 2px ${({ theme }) => theme.colors.productColors.yellowDark};
   }
 
   body {
-    background-color: ${({ theme }) => theme.background};
-    color: ${({ theme }) => theme.baseText}; 
+    background-color: ${({ theme }) => theme.colors.baseColors.background};
+    color: ${({ theme }) => theme.colors.baseColors.baseText}; 
     -webkit-font-smoothing: antialiased;
   }
   
@@ -22,14 +22,14 @@ export const GlobalStyle = createGlobalStyle`
     font-family: "Baloo 2", sans-serif;
     font-weight: 800;
     line-height: 130%;
-    font-size: 1.5rem;
+    font-size: ${({ theme }) => theme.textSizes.titles.titleM};
   }
 
   body, input {
     font-family: 'Roboto', sans-serif;
     font-weight: 400;
     line-height: 130%;
-    font-size: 1rem;
+    font-size: ${({ theme }) => theme.textSizes.texts.textM}
   }
 
   button {

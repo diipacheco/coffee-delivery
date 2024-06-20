@@ -14,6 +14,7 @@
     "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-jsx-a11y": "^6.9.0",
     "eslint-plugin-react": "^7.34.3",
+    "phosphor-react": "^1.4.1",
     "prettier": "^3.3.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
