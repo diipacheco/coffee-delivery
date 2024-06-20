@@ -1,12 +1,12 @@
 import { styled } from 'styled-components';
 
 export const Container = styled.header`
-  padding: 2rem 10rem;
-
+  max-width: 1160px;
+  padding: 2rem 1.25rem;
+  margin: 0 auto;
   display: flex;
-  flex: 1;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
 `;
 
 export const LogoContainer = styled.div`
