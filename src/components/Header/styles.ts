@@ -1,7 +1,7 @@
 import { styled } from 'styled-components';
 
 export const Container = styled.header`
-  max-width: 1160px;
+  max-width: 72.5rem;
   padding: 2rem 1.25rem;
   margin: 0 auto;
   display: flex;
@@ -11,7 +11,7 @@ export const Container = styled.header`
 
 export const LogoContainer = styled.div`
   > img {
-    height: 40px;
+    height: 2.5rem;
   }
 `;
 
@@ -52,10 +52,10 @@ export const CartCounter = styled.span`
 
   position: absolute;
   border-radius: 50%;
-  width: 20px;
-  height: 20px;
-  top: 0px;
-  right: 0px;
+  width: 1.25rem;
+  height: 1.25rem;
+  top: 0;
+  right: 0;
   transform: translate(40%, -40%);
 
   font-size: ${({ theme }) => theme.textSizes.texts.textS};
