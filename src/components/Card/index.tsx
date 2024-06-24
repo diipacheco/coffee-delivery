@@ -1,22 +1,40 @@
+import { useState } from 'react';
 import { useTheme } from 'styled-components';
 import { ShoppingCart } from 'phosphor-react';
 
-import { CoffeeInfo, Container, Tags, Tag, Control, Price, Order } from './styles';
 import { QuantityInput } from '../Form/QuantityInput';
+import { Coffee } from '../../reducers/cart/reducer';
+
+import { CoffeeInfo, Container, Tags, Tag, Control, Price, Order } from './styles';
+import { useCartContext } from '../../context/Cart';
 
 interface CardProps {
-  coffee: {
-    id: string;
-    title: string;
-    description: string;
-    price: number;
-    image: string;
-    tags: string[];
-  };
+  coffee: Coffee;
 }
 export function Card({ coffee }: CardProps) {
-  const coffeePrice = coffee.price.toFixed(2);
   const theme = useTheme();
+  const [quantity, setQuantity] = useState(1);
+  const { addCoffeeToCart } = useCartContext();
+
+  const coffeePrice = coffee.price.toFixed(2);
+
+  function increaseQuantity() {
+    setQuantity((state) => state + 1);
+  }
+
+  function decreaseQuantity() {
+    setQuantity((state) => {
+      if (state > 1) {
+        return state - 1;
+      }
+      return state;
+    });
+  }
+
+  function handleAddCoffeeToCart() {
+    addCoffeeToCart(coffee, quantity);
+  }
+
   return (
     <Container>
       <img src={coffee.image} alt={coffee.title} />
@@ -39,8 +57,8 @@ export function Card({ coffee }: CardProps) {
         </Price>
 
         <Order>
-          <QuantityInput />
-          <button type="button">
+          <QuantityInput quantity={quantity} increaseQuantity={increaseQuantity} decreaseQuantity={decreaseQuantity} />
+          <button type="button" onClick={handleAddCoffeeToCart}>
             <ShoppingCart size={22} weight="fill" color={theme.colors.baseColors.baseCard} />
           </button>
         </Order>

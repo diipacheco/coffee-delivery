@@ -4,8 +4,10 @@ import { MapPin, ShoppingCart } from 'phosphor-react';
 import Logo from '../../assets/Logo.svg';
 
 import { Cart, CartContainer, Container, LocaleIndicator, LogoContainer, CartCounter } from './styles';
+import { useCartContext } from '../../context/Cart';
 
 export function Header() {
+  const { addedItems } = useCartContext();
   const theme = useTheme();
   return (
     <Container>
@@ -19,7 +21,7 @@ export function Header() {
         </LocaleIndicator>
         <Cart>
           <ShoppingCart size={22} color={theme.colors.productColors.yellowDark} weight="fill" />
-          <CartCounter>3</CartCounter>
+          {addedItems.length >= 1 && <CartCounter>{addedItems.length}</CartCounter>}
         </Cart>
       </CartContainer>
     </Container>
