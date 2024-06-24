@@ -2,6 +2,7 @@ import { useTheme } from 'styled-components';
 import { ShoppingCart } from 'phosphor-react';
 
 import { CoffeeInfo, Container, Tags, Tag, Control, Price, Order } from './styles';
+import { QuantityInput } from '../Form/QuantityInput';
 
 interface CardProps {
   coffee: {
@@ -38,10 +39,7 @@ export function Card({ coffee }: CardProps) {
         </Price>
 
         <Order>
-          {/**
-            Fazer o input em um componente separado de form
-           */}
-          <input type="number" />
+          <QuantityInput />
           <button type="button">
             <ShoppingCart size={22} weight="fill" color={theme.colors.baseColors.baseCard} />
           </button>

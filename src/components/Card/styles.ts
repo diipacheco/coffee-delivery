@@ -93,10 +93,6 @@ export const Order = styled.div`
   align-items: center;
   gap: 0.5rem;
 
-  > input {
-    max-width: 4.5rem;
-  }
-
   > button {
     width: 2.375rem;
     height: 2.375rem;
