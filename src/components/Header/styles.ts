@@ -1,14 +1,31 @@
-import { Link } from 'react-router-dom';
-import { styled } from 'styled-components';
+import { styled, css } from 'styled-components';
 
-export const Container = styled.header`
+import { Link } from 'react-router-dom';
+
+export const defaultHeaderCss = css`
   max-width: 72.5rem;
-  padding: 2rem 1.25rem;
   margin: 0 auto;
+  padding: 2rem 1.25rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
 `;
+
+export const fixedHeaderCss = css`
+  padding: 2rem 1.25rem;
+  position: fixed;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: ${({ theme }) => theme.colors.baseColors.baseCard};
+`;
+
+export const Container = styled.header<{ $isFixed: boolean }>`
+  ${({ $isFixed }) => ($isFixed ? fixedHeaderCss : defaultHeaderCss)}
+`;
+
+export const FixedHeader = styled(Container)``;
 
 export const LogoContainer = styled(Link)`
   > img {

@@ -12,11 +12,7 @@ export interface Coffee {
   tags: string[];
 }
 
-export interface AddedItem {
-  id: string;
-  image: string;
-  title: string;
-  price: number;
+export interface AddedItem extends Coffee {
   quantity: number;
   subtotal: number;
 }

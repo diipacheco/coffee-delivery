@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { useTheme } from 'styled-components';
 import { ShoppingCart } from 'phosphor-react';
 
+import { useCartContext } from '../../context/Cart';
+
 import { QuantityInput } from '../Form/QuantityInput';
 import { Coffee } from '../../reducers/cart/reducer';
 
@@ -14,7 +16,6 @@ import {
   Price,
   Order,
 } from './styles';
-import { useCartContext } from '../../context/Cart';
 
 interface CardProps {
   coffee: Coffee;
