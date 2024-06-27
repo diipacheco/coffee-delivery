@@ -5,26 +5,38 @@ import { ShoppingCart } from 'phosphor-react';
 import { QuantityInput } from '../Form/QuantityInput';
 import { Coffee } from '../../reducers/cart/reducer';
 
-import { CoffeeInfo, Container, Tags, Tag, Control, Price, Order } from './styles';
+import {
+  CoffeeInfo,
+  Container,
+  Tags,
+  Tag,
+  Control,
+  Price,
+  Order,
+} from './styles';
 import { useCartContext } from '../../context/Cart';
 
 interface CardProps {
   coffee: Coffee;
 }
 export function Card({ coffee }: CardProps) {
+  const [subtotal, setSubtotal] = useState(coffee.price);
+
+  const { addCoffeeToCart } = useCartContext();
   const theme = useTheme();
   const [quantity, setQuantity] = useState(1);
-  const { addCoffeeToCart } = useCartContext();
 
-  const coffeePrice = coffee.price.toFixed(2);
+  const coffeePrice = subtotal.toFixed(2);
 
   function increaseQuantity() {
-    setQuantity((state) => state + 1);
+    setQuantity(state => state + 1);
+    setSubtotal(state => (state += coffee.price));
   }
 
   function decreaseQuantity() {
-    setQuantity((state) => {
+    setQuantity(state => {
       if (state > 1) {
+        setSubtotal(state => state - coffee.price);
         return state - 1;
       }
       return state;
@@ -32,7 +44,12 @@ export function Card({ coffee }: CardProps) {
   }
 
   function handleAddCoffeeToCart() {
-    addCoffeeToCart(coffee, quantity);
+    const itemToAddData = {
+      ...coffee,
+      quantity,
+      subtotal,
+    };
+    addCoffeeToCart(itemToAddData, quantity);
   }
 
   return (
@@ -40,7 +57,7 @@ export function Card({ coffee }: CardProps) {
       <img src={coffee.image} alt={coffee.title} />
 
       <Tags>
-        {coffee.tags.map((tag) => (
+        {coffee.tags.map(tag => (
           <Tag key={tag}>{tag}</Tag>
         ))}
       </Tags>
@@ -57,9 +74,17 @@ export function Card({ coffee }: CardProps) {
         </Price>
 
         <Order>
-          <QuantityInput quantity={quantity} increaseQuantity={increaseQuantity} decreaseQuantity={decreaseQuantity} />
+          <QuantityInput
+            quantity={quantity}
+            increaseQuantity={increaseQuantity}
+            decreaseQuantity={decreaseQuantity}
+          />
           <button type="button" onClick={handleAddCoffeeToCart}>
-            <ShoppingCart size={22} weight="fill" color={theme.colors.baseColors.baseCard} />
+            <ShoppingCart
+              size={22}
+              weight="fill"
+              color={theme.colors.baseColors.baseCard}
+            />
           </button>
         </Order>
       </Control>

@@ -11,7 +11,7 @@ export function Header() {
   const theme = useTheme();
   return (
     <Container>
-      <LogoContainer>
+      <LogoContainer to="/">
         <img src={Logo} alt="" />
       </LogoContainer>
       <CartContainer>
@@ -19,7 +19,7 @@ export function Header() {
           <MapPin weight="fill" color={theme.colors.productColors.purple} size={22} />
           São Paulo, SP
         </LocaleIndicator>
-        <Cart>
+        <Cart to="/checkout">
           <ShoppingCart size={22} color={theme.colors.productColors.yellowDark} weight="fill" />
           {addedItems.length >= 1 && <CartCounter>{addedItems.length}</CartCounter>}
         </Cart>

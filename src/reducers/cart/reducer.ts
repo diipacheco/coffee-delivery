@@ -14,9 +14,11 @@ export interface Coffee {
 
 export interface AddedItem {
   id: string;
+  image: string;
   title: string;
   price: number;
   quantity: number;
+  subtotal: number;
 }
 
 interface CartState {
@@ -26,13 +28,43 @@ interface CartState {
 export function cartReducer(state: CartState, action: any) {
   switch (action.type) {
     case ActionTypes.ADD_COFFEE_TO_CART:
-      return produce(state, (draft) => {
-        const itemAlreadyAdded = draft.addedItems.find((item) => item.id === action.payload.itemToAdd.id);
+      return produce(state, draft => {
+        const itemAlreadyAdded = draft.addedItems.find(
+          item => item.id === action.payload.itemToAdd.id,
+        );
         if (itemAlreadyAdded) {
           itemAlreadyAdded.quantity += action.payload.itemToAdd.quantity;
+          itemAlreadyAdded.subtotal += action.payload.itemToAdd.subtotal;
         } else {
           draft.addedItems.push(action.payload.itemToAdd);
         }
+      });
+    case ActionTypes.INCREASE_ADDED_ITEM_QUANTITY:
+      return produce(state, draft => {
+        const addedItem = draft.addedItems.find(
+          item => item.id === action.payload.itemToAddId,
+        );
+        if (addedItem) {
+          addedItem.quantity += 1;
+          addedItem.subtotal = addedItem.price * addedItem.quantity;
+        }
+      });
+    case ActionTypes.DECREASE_ADDED_ITEM_QUANTITY:
+      return produce(state, draft => {
+        const addedItem = draft.addedItems.find(
+          item => item.id === action.payload.itemToAddId,
+        );
+        if (addedItem) {
+          addedItem.quantity -= 1;
+          addedItem.subtotal -= addedItem.price;
+        }
+      });
+
+    case ActionTypes.REMOVE_COFFEE_FROM_CART:
+      return produce(state, draft => {
+        draft.addedItems = draft.addedItems.filter(
+          item => item.id !== action.payload.itemToRemove,
+        );
       });
     default:
       return state;

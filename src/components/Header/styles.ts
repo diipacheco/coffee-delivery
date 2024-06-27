@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { styled } from 'styled-components';
 
 export const Container = styled.header`
@@ -9,7 +10,7 @@ export const Container = styled.header`
   align-items: center;
 `;
 
-export const LogoContainer = styled.div`
+export const LogoContainer = styled(Link)`
   > img {
     height: 2.5rem;
   }
@@ -31,7 +32,7 @@ export const LocaleIndicator = styled.div`
   border-radius: 6px;
 `;
 
-export const Cart = styled.div`
+export const Cart = styled(Link)`
   display: flex;
   justify-content: center;
   align-items: center;

@@ -100,5 +100,11 @@ export const Order = styled.div`
     border-radius: 6px;
     padding: 0.5rem;
     background-color: ${({ theme }) => theme.colors.productColors.purpleDark};
+    cursor: pointer;
+    transition: 0.1s ease;
+  }
+
+  > button:hover {
+    background-color: ${({ theme }) => theme.colors.productColors.purple};
   }
 `;

@@ -1,9 +1,10 @@
 import { Coffee, Package, ShoppingCart, Timer } from 'phosphor-react';
 import { useTheme } from 'styled-components';
 
+import { Card } from '../../components/Card';
+
 import CoffeeDelivery from '../../assets/CoffeeDelivery.png';
 import productsData from '../../../data.json';
-import { Card } from '../../components/Card';
 
 import { Intro, IntroInfo, ProductsListContainer } from './styles';
 
@@ -14,7 +15,10 @@ export function Home() {
       <Intro>
         <div>
           <h1>Encontre o café perfeito para qualquer hora do dia</h1>
-          <p>Com o Coffee Delivery você recebe seu café onde estiver, a qualquer hora</p>
+          <p>
+            Com o Coffee Delivery você recebe seu café onde estiver, a qualquer
+            hora
+          </p>
 
           <IntroInfo>
             <div>
@@ -22,7 +26,9 @@ export function Home() {
                 size={32}
                 weight="fill"
                 color={theme.colors.baseColors.background}
-                style={{ backgroundColor: theme.colors.productColors.yellowDark }}
+                style={{
+                  backgroundColor: theme.colors.productColors.yellowDark,
+                }}
               />
               <span>Compra simples e segura</span>
             </div>
@@ -67,7 +73,7 @@ export function Home() {
         <h2>Nossos Cafés</h2>
 
         <ul>
-          {productsData.coffees.map((coffee) => (
+          {productsData.coffees.map(coffee => (
             <li key={coffee.id}>
               <Card coffee={coffee} />
             </li>
