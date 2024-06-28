@@ -1,10 +1,10 @@
-/* eslint-disable no-shadow */
-import { AddedItem } from './reducer';
+import { AddedItem, Order } from './reducer';
 
 /* eslint-disable no-unused-vars */
 export enum ActionTypes {
   ADD_COFFEE_TO_CART = 'ADD_COFFEE_TO_CART',
   REMOVE_COFFEE_FROM_CART = 'REMOVE_COFFEE_FROM_CART',
+  CHECKOUT_ORDER = 'CHECKOUT_ORDER',
 
   INCREASE_ADDED_ITEM_QUANTITY = 'INCREASE_ADDED_ITEM_QUANTITY',
   DECREASE_ADDED_ITEM_QUANTITY = 'DECREASE_ADDED_ITEM_QUANTITY',
@@ -52,6 +52,15 @@ export function decreaseAddedItemQuantityAction(itemToAddId: string) {
     type: ActionTypes.DECREASE_ADDED_ITEM_QUANTITY,
     payload: {
       itemToAddId,
+    },
+  };
+}
+
+export function checkoutOrderAction(order: Order) {
+  return {
+    type: ActionTypes.CHECKOUT_ORDER,
+    payload: {
+      order,
     },
   };
 }

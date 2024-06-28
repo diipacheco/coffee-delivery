@@ -3,9 +3,9 @@ import { useTheme } from 'styled-components';
 import { ShoppingCart } from 'phosphor-react';
 
 import { useCartContext } from '../../context/Cart';
+import { Coffee } from '../../reducers/cart/reducer';
 
 import { QuantityInput } from '../Form/QuantityInput';
-import { Coffee } from '../../reducers/cart/reducer';
 
 import {
   CoffeeInfo,
@@ -21,11 +21,11 @@ interface CardProps {
   coffee: Coffee;
 }
 export function Card({ coffee }: CardProps) {
-  const [subtotal, setSubtotal] = useState(coffee.price);
-
   const { addCoffeeToCart } = useCartContext();
   const theme = useTheme();
+
   const [quantity, setQuantity] = useState(1);
+  const [subtotal, setSubtotal] = useState(coffee.price);
 
   const coffeePrice = subtotal.toFixed(2);
 

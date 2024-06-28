@@ -1,7 +1,8 @@
 import { useLayoutEffect, useRef, useState } from 'react';
-
 import { useTheme } from 'styled-components';
 import { MapPin, ShoppingCart } from 'phosphor-react';
+
+import { useCartContext } from '../../context/Cart';
 
 import Logo from '../../assets/Logo.svg';
 
@@ -13,7 +14,6 @@ import {
   LogoContainer,
   CartCounter,
 } from './styles';
-import { useCartContext } from '../../context/Cart';
 
 export function Header() {
   const { addedItems } = useCartContext();

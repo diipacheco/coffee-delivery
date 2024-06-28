@@ -17,8 +17,21 @@ export interface AddedItem extends Coffee {
   subtotal: number;
 }
 
+export interface Order {
+  id: number;
+  address: {
+    street: string;
+    number: string;
+    neighborhood: string;
+    city: string;
+    state: string;
+  };
+  paymentMethod: 'debito' | 'credit' | 'cash';
+}
+
 interface CartState {
   addedItems: AddedItem[];
+  checkoutOrder: Order;
 }
 
 export function cartReducer(state: CartState, action: any) {
@@ -55,13 +68,18 @@ export function cartReducer(state: CartState, action: any) {
           addedItem.subtotal -= addedItem.price;
         }
       });
-
     case ActionTypes.REMOVE_COFFEE_FROM_CART:
       return produce(state, draft => {
         draft.addedItems = draft.addedItems.filter(
           item => item.id !== action.payload.itemToRemove,
         );
       });
+    case ActionTypes.CHECKOUT_ORDER: {
+      return produce(state, draft => {
+        draft.checkoutOrder = action.payload.order;
+        draft.addedItems = [];
+      });
+    }
     default:
       return state;
   }

@@ -1,15 +1,17 @@
 import { createContext, useContext, useReducer } from 'react';
 
-import { AddedItem, cartReducer } from '../../reducers/cart/reducer';
+import { AddedItem, Order, cartReducer } from '../../reducers/cart/reducer';
 import {
   addCoffeeToCartAction,
   decreaseAddedItemQuantityAction,
   increaseAddedItemQuantityAction,
   removeCoffeeFromCartAction,
+  checkoutOrderAction,
 } from '../../reducers/cart/actions';
 
 interface ICartContext {
   addedItems: AddedItem[];
+  checkoutOrder: Order;
   // eslint-disable-next-line no-unused-vars
   addCoffeeToCart: (itemToAdd: AddedItem, quantity: number) => void;
   // eslint-disable-next-line no-unused-vars
@@ -18,6 +20,8 @@ interface ICartContext {
   decreaseAddedItemQuantity: (itemToAddId: string) => void;
   // eslint-disable-next-line no-unused-vars
   removeCoffeeFromCart: (itemToRemove: string) => void;
+  // eslint-disable-next-line no-unused-vars
+  checkout: (order: Order) => void;
 }
 
 const CartContext = createContext({} as ICartContext);
@@ -28,6 +32,7 @@ interface CartContextProviderProps {
 export function CartContextProvider({ children }: CartContextProviderProps) {
   const [cartState, dispatch] = useReducer(cartReducer, {
     addedItems: [],
+    checkoutOrder: {} as Order,
   });
 
   function addCoffeeToCart(itemToAdd: AddedItem, quantity: number) {
@@ -46,15 +51,21 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
     dispatch(removeCoffeeFromCartAction(itemToRemove));
   }
 
-  const { addedItems } = cartState;
+  function checkout(order: Order) {
+    dispatch(checkoutOrderAction(order));
+  }
+
+  const { addedItems, checkoutOrder } = cartState;
   return (
     <CartContext.Provider
       value={{
         addedItems,
+        checkoutOrder,
         addCoffeeToCart,
         removeCoffeeFromCart,
         increaseAddedItemQuantity,
         decreaseAddedItemQuantity,
+        checkout,
       }}
     >
       {children}

@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable react/display-name */
 import { FieldError, FieldErrorsImpl, Merge } from 'react-hook-form';
-
 import {
   HTMLAttributes,
   InputHTMLAttributes,
@@ -10,6 +9,7 @@ import {
   useState,
   LegacyRef,
 } from 'react';
+
 import { Container, ErrorMessage, Label } from './styles';
 
 interface TextInputProps extends InputHTMLAttributes<HTMLInputElement> {

@@ -12,17 +12,17 @@ export const defaultHeaderCss = css`
 `;
 
 export const fixedHeaderCss = css`
-  padding: 2rem 1.25rem;
+  padding: 2rem 24.6rem;
   position: fixed;
   width: 100%;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
   background-color: ${({ theme }) => theme.colors.baseColors.baseCard};
 `;
 
 export const Container = styled.header<{ $isFixed: boolean }>`
-  ${({ $isFixed }) => ($isFixed ? fixedHeaderCss : defaultHeaderCss)}
+  ${({ $isFixed }) => ($isFixed ? fixedHeaderCss : defaultHeaderCss)};
 `;
 
 export const FixedHeader = styled(Container)``;

@@ -1,10 +1,14 @@
 import * as zod from 'zod';
+import { useNavigate } from 'react-router-dom';
 import { FormProvider, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 import { AddressForm } from './components/AddressForm';
 import { CheckoutInfo } from './components/CheckoutInfo';
 import { PaymentSelection } from './components/PaymentSelection';
+
+import { useCartContext } from '../../context/Cart';
+import { Order } from '../../reducers/cart/reducer';
 
 import { CheckoutContainer, Container, OrderContainer } from './styles';
 
@@ -41,11 +45,33 @@ export function Checkout() {
   const newOrderForm = useForm<FormInputs>({
     resolver: zodResolver(newOrderValidationSchema),
   });
+  const navigate = useNavigate();
+  const { checkout } = useCartContext();
 
   const { handleSubmit, reset } = newOrderForm;
 
-  function handleNewOrder() {
-    console.log('submit');
+  function handleNewOrder({
+    street,
+    number,
+    city,
+    state,
+    paymentMethod,
+    neighborhood,
+  }: NewOrderFormData) {
+    const order = {
+      id: new Date().getTime(),
+      address: {
+        street,
+        number,
+        neighborhood,
+        city,
+        state,
+      },
+      paymentMethod,
+    } as Order;
+    checkout(order);
+    navigate(`/order/${order.id}/success`);
+
     reset();
   }
 
